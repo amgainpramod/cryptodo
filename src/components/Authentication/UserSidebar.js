@@ -8,7 +8,7 @@ import { auth, db } from "../../config/firebaseConfig";
 import { numberWithCommas } from "../Banner/Carousel";
 import { AiFillDelete } from "react-icons/ai";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     height: "92%",
   },
   logout: {
-    height: "8%",
+    height: "5%",
     width: "100%",
     backgroundColor: "#EEBC1D",
     marginTop: 20,
@@ -62,6 +62,9 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#EEBC1D",
+    "&:hover": {
+      background: "#E8F1E9",
+    },
     boxShadow: "0 0 3px black",
     cursor: "pointer",
     paddingRight: 5,
@@ -96,7 +99,7 @@ export default function UserSidebar() {
       type: "success",
       message: "Logout Successfull!",
     });
-    navigate("/");
+    navigate("/", { replace: true });
 
     toggleDrawer();
   };
@@ -188,7 +191,9 @@ export default function UserSidebar() {
                             </span>
                           </div>
                           <AiFillDelete
-                            style={{ cursor: "pointer" }}
+                            style={{
+                              cursor: "pointer",
+                            }}
                             fontSize="16"
                             onClick={() => removeFromWatchlist(coin)}
                             color="black"
