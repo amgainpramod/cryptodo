@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import CoinInfo from "../components/CoinInfo";
 import { numberWithCommas } from "../components/Banner/Carousel";
-import { doc, setDoc } from "@firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
 const Coinpage = () => {

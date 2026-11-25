@@ -8,14 +8,12 @@ import {
   createTheme,
   ThemeProvider,
   makeStyles,
-  Button,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { CryptoState } from "../CryptoContext";
 import { useEffect } from "react";
 import AuthModal from "./Authentication/AuthModal";
-import { signOut } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
 import UserSidebar from "./Authentication/UserSidebar";
 
@@ -97,7 +95,7 @@ const Header = () => {
                 );
               })}
             </Select>
-            {user ? <UserSidebar /> : <AuthModal />}
+            {auth && (user ? <UserSidebar /> : <AuthModal />)}
           </Toolbar>
         </Container>
       </AppBar>

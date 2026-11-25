@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "@firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
@@ -45,10 +45,8 @@ const CryptoContext = ({ children }) => {
   }, [currentCurrency]);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) setUser(user);
-      else setUser(null);
-    });
+    if (!auth) return;
+    return onAuthStateChanged(auth, setUser);
   }, []);
 
   // console.log("Currency List", currencyList);

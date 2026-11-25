@@ -200,7 +200,7 @@ export default function UserSidebar() {
                           />
                         </div>
                       );
-                    // console.log(coin.name, coin.id);
+                    return null;
                   })}
                 </div>
               </div>

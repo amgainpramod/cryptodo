@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+# CryptoDo
+
+Install and start the app from this directory:
+
+```sh
+npm ci
+npm start
+```
+
+Coin browsing uses CoinGecko. For email sign-in, Google sign-in and saved watchlists, copy `.env.example` to `.env.local` and fill in your Firebase web app configuration. Enable the sign-in providers in Firebase Authentication and configure Cloud Firestore for user watchlists. Restart the dev server after changing `.env.local`.
+
+## Create React App commands
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

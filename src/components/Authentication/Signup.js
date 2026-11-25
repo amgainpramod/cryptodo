@@ -1,7 +1,6 @@
 import { Box, Button, TextField } from "@material-ui/core";
 import {
   createUserWithEmailAndPassword,
-  updateCurrentUser,
   updateProfile,
   sendEmailVerification,
 } from "firebase/auth";
@@ -15,7 +14,7 @@ const Signup = ({ handleClose }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { setAlert, user } = CryptoState();
+  const { setAlert } = CryptoState();
 
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
@@ -27,29 +26,20 @@ const Signup = ({ handleClose }) => {
       return;
     }
     try {
-      const result = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      await sendEmailVerification(auth.currentUser);
+      const displayName = fullName.trim().split(/\s+/)[0];
+      await updateProfile(user, { displayName });
+      await sendEmailVerification(user);
       setAlert({
         open: true,
-        message: `Welcome ${user.displayName}. Please confirm your email`,
+        message: `Welcome ${displayName || user.email}. Please confirm your email.`,
         type: "success",
       });
-
-      await updateProfile(auth.currentUser, {
-        displayName: fullName.split(" ")[0],
-      });
-
-      //   setAlert({
-      //     open: true,
-      //     message: `Sign up Successful. Welcome ${auth?.currentUser?.displayName}`,
-      //     type: "success",
-      //   });
-      //   handleClose();
-      //   console.log("userDetail", result);
+      handleClose();
     } catch (error) {
       setAlert({
         open: true,
